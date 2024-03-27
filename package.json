@@ -12,10 +12,12 @@
     "@radix-ui/themes": "^3.0.1",
     "@vercel/analytics": "^1.2.2",
     "cmdk": "^1.0.0",
+    "css": "^3.0.0",
     "next": "14.1.4",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "tailwind": "^4.0.0",
     "typescript": "^5.4.3"
   },
   "devDependencies": {
