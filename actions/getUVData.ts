@@ -1,12 +1,12 @@
 export const getUVData = async ({
-  lattitude,
+  latitude,
   longitude,
 }: {
-  lattitude: string;
+  latitude: string;
   longitude: string;
 }) => {
   const data = await fetch(
-    `https://${process.env.VERCEL_URL}/api/weather/uv?lat=${lattitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`
+    `https://${process.env.VERCEL_URL}/api/weather/uv?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`
   );
 
   if (!data.ok) {
