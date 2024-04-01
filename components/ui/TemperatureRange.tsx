@@ -59,3 +59,5 @@ const TemperatureRange = React.forwardRef(
   }
 );
 TemperatureRange.displayName = "TemperatureRange";
+
+export { TemperatureRange };
