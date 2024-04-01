@@ -13,6 +13,10 @@ import {
 } from "../lib/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import TenDayForecast from "../components/widgets/TenDayForecast";
+import WeatherWidgets from "../components/widgets/WeatherWidgets";
+import Map from "../components/widgets/Map";
+import OtherLargeCities from "../components/widgets/OtherLargeCities";
 
 export const metadata: Metadata = {
   title: `${DEFAULT_LOCATION.city} - Weather Forecast`,
@@ -62,10 +66,18 @@ async function Page() {
             data={hourly_data?.list[0]}
             city={hourly_data?.city}
           />
-          {/* <TenDayForecast data={ten_day_forecast} /> */}
+          <TenDayForecast data={ten_day_forecast} />
         </div>
         <section className="grid h-full grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
+          <WeatherWidgets
+            data={hourly_data?.list[0]}
+            airQuality={air_pollution?.list[0]}
+            city={hourly_data?.city}
+            uvIndexForToday={uv_index?.daily?.uv_index_max[0]}
+          />
           <HourlyForecast data={hourly_data?.list} />
+          <Map />
+          <OtherLargeCities />
         </section>
       </div>
     </>
