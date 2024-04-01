@@ -24,6 +24,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hotkeys-hook": "^4.5.0",
+    "react-use-draggable-scroll": "^0.4.7",
     "tailwind": "^4.0.0",
     "tailwind-merge": "^2.2.2",
     "typescript": "^5.4.3"
