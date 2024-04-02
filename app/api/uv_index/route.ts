@@ -1,17 +1,17 @@
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const latitude = searchParams.get("lat");
-  const longitude = searchParams.get("lon");
+  const lat = searchParams.get("lat");
+  const lon = searchParams.get("lon");
 
-  if (!latitude || !longitude) {
+  if (!lat || !lon) {
     return Response.json(
-      { message: "latitude and longitude are required" },
+      { message: "lat and lon are required" },
       { status: 400 }
     );
   }
 
   const res = await fetch(
-    `https://api.openuv.io/api/v1/uv?lat=${latitude}&lng=${longitude}`,
+    `https://api.openuv.io/api/v1/uv?lat=${lat}&lng=${lon}`,
     {
       headers: {
         "x-access-token": `${process.env.NEXT_PUBLIC_OPEN_UV_API_KEY}`,

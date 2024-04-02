@@ -1,6 +1,6 @@
 type Coordinates = {
-  longitude: string;
-  latitude: string;
+  lon: string;
+  lat: string;
 };
 export type Location = {
   city: string;
@@ -9,8 +9,8 @@ export type Location = {
 
 export type OpenWeatherData = {
   coord: {
-    longitude: number;
-    latitude: number;
+    lon: number;
+    lat: number;
   };
   weather: {
     id: number;
@@ -125,8 +125,8 @@ type DailyData = {
 };
 
 export type UVIndexResponse = {
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lon: number;
   generationtime_ms: number;
   utc_offset_seconds: number;
   timezone: string;
@@ -140,8 +140,8 @@ export type City = {
   id: number;
   name: string;
   coord: {
-    longitude: number;
-    latitude: number;
+    lon: number;
+    lat: number;
   };
   country: string;
   population: number;

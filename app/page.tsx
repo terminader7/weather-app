@@ -4,6 +4,10 @@ import { getTenDayForecast } from "../actions/getTenDayForecast";
 import { getUVData } from "../actions/getUVData";
 import CurrentWeather from "../components/widgets/CurrentWeather";
 import HourlyForecast from "../components/widgets/HourlyForecast";
+import Map from "../components/widgets/Map";
+import OtherLargeCities from "../components/widgets/OtherLargeCities";
+import TenDayForecast from "../components/widgets/TenDayForecast";
+import WeatherWidgets from "../components/widgets/WeatherWidgets";
 import { DEFAULT_LOCATION } from "../lib/config";
 import {
   AirPollutionResponse,
@@ -13,69 +17,57 @@ import {
 } from "../lib/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import TenDayForecast from "../components/widgets/TenDayForecast";
-import WeatherWidgets from "../components/widgets/WeatherWidgets";
-import Map from "../components/widgets/Map";
-import OtherLargeCities from "../components/widgets/OtherLargeCities";
 
 export const metadata: Metadata = {
   title: `${DEFAULT_LOCATION.city} - Weather Forecast`,
-  description: `Weather forecast for ${DEFAULT_LOCATION.city}`,
+  description: `${DEFAULT_LOCATION.city} weather forecast with current conditions, wind, air quality, and what to expect for the next 3 days.`,
 };
 
-async function Page() {
-  const { latitude, longitude } = DEFAULT_LOCATION.coord;
+export default async function Home() {
+  const { lat, lon } = DEFAULT_LOCATION.coord;
 
-  const HourlyDataReq: HourlyForecastResponse = await getHourlyData({
-    latitude,
-    longitude,
+  const HourlyDataRequest: HourlyForecastResponse = await getHourlyData({
+    lat,
+    lon,
   });
-
-  const TenDayForecastReq: TenDayForecastData = await getTenDayForecast({
-    latitude,
-    longitude,
+  const TenDayForecastRequest: TenDayForecastData = await getTenDayForecast({
+    lat,
+    lon,
   });
-
-  const AirDataReq: AirPollutionResponse = await getAirPollutionData({
-    latitude,
-    longitude,
+  const AirDataRequest: AirPollutionResponse = await getAirPollutionData({
+    lat,
+    lon,
   });
-
-  const UvIndexReq: UVIndexResponse = await getUVData({
-    latitude,
-    longitude,
+  const UvIndexRequest: UVIndexResponse = await getUVData({
+    lat,
+    lon,
   });
 
   const [hourly_data, ten_day_forecast, air_pollution, uv_index] =
     await Promise.all([
-      HourlyDataReq,
-      TenDayForecastReq,
-      AirDataReq,
-      UvIndexReq,
+      HourlyDataRequest,
+      TenDayForecastRequest,
+      AirDataRequest,
+      UvIndexRequest,
     ]);
 
-  if (!hourly_data || !ten_day_forecast || !air_pollution || !uv_index) {
-    return notFound();
-  }
+  if (!hourly_data || !ten_day_forecast || !air_pollution) return notFound();
 
   return (
     <>
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
-          <CurrentWeather
-            data={hourly_data?.list[0]}
-            city={hourly_data?.city}
-          />
+          <CurrentWeather data={hourly_data.list[0]} city={hourly_data.city} />
           <TenDayForecast data={ten_day_forecast} />
         </div>
-        <section className="grid h-full grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
+        <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
           <WeatherWidgets
-            data={hourly_data?.list[0]}
-            airQuality={air_pollution?.list[0]}
-            city={hourly_data?.city}
-            uvIndexForToday={uv_index?.daily?.uv_index_max[0]}
+            data={hourly_data.list[0]}
+            city={hourly_data.city}
+            airQuality={air_pollution.list[0]}
+            uvIndexForToday={uv_index.daily.uv_index_max[0]}
           />
-          <HourlyForecast data={hourly_data?.list} />
+          <HourlyForecast data={hourly_data.list} />
           <Map />
           <OtherLargeCities />
         </section>
@@ -83,5 +75,3 @@ async function Page() {
     </>
   );
 }
-
-export default Page;

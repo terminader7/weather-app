@@ -12,7 +12,7 @@ export default function OtherLargeCities() {
           <Link
             key={item.city}
             scroll={false}
-            href={`/search?lat=${item.coord.latitude}&lon=${item.coord.longitude}`}
+            href={`/search?lat=${item.coord.lat}&lon=${item.coord.lon}`}
             className="rounded-lg border bg-card px-6 py-4 text-card-foreground shadow-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             {item.city}

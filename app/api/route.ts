@@ -1,7 +1,7 @@
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const latitude = searchParams.get("lat");
-  const longitude = searchParams.get("lon");
+  const lat = searchParams.get("lat");
+  const lon = searchParams.get("lon");
   const appid = searchParams.get("appid");
 
   if (!appid) {
@@ -11,15 +11,15 @@ export async function GET(request: Request) {
     );
   }
 
-  if (!latitude || !longitude) {
+  if (!lat || !lon) {
     return Response.json(
-      { message: "latitude and longitude are required" },
+      { message: "lat and lon are required" },
       { status: 400 }
     );
   }
 
   const res = await fetch(
-    `https://pro.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${appid}`,
+    `https://pro.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${appid}`,
     {
       next: { revalidate: 900 },
     }

@@ -31,20 +31,14 @@ export default function Map() {
   }, [theme]);
 
   const searchParams = useSearchParams();
-  const latitude =
-    searchParams.get("latitude") || DEFAULT_LOCATION.coord.latitude;
-  const longitude =
-    searchParams.get("longitude") || DEFAULT_LOCATION.coord.longitude;
+  const lat = searchParams.get("lat") || DEFAULT_LOCATION.coord.lat;
+  const lon = searchParams.get("lon") || DEFAULT_LOCATION.coord.lon;
 
-  const [defaultLatitude, defaultLongitude] = useMemo(() => {
-    const latNumber = latitude
-      ? Number(latitude)
-      : Number(DEFAULT_LOCATION.coord.latitude);
-    const lonNumber = longitude
-      ? Number(longitude)
-      : Number(DEFAULT_LOCATION.coord.longitude);
+  const [defaultlat, defaultlon] = useMemo(() => {
+    const latNumber = lat ? Number(lat) : Number(DEFAULT_LOCATION.coord.lat);
+    const lonNumber = lon ? Number(lon) : Number(DEFAULT_LOCATION.coord.lon);
     return [latNumber, lonNumber];
-  }, [latitude, longitude]);
+  }, [lat, lon]);
 
   const weatherTiles = useMemo(() => {
     return [
@@ -65,8 +59,8 @@ export default function Map() {
   };
 
   const [viewport, setViewport] = useState({
-    latitude: latitude ? Number(latitude) : Number(defaultLatitude),
-    longitude: longitude ? Number(longitude) : Number(defaultLongitude),
+    lat: lat ? Number(lat) : Number(defaultlat),
+    lon: lon ? Number(lon) : Number(defaultlon),
     zoom: 7,
     pitch: 60,
     bearing: -60,
@@ -77,10 +71,10 @@ export default function Map() {
   useEffect(() => {
     setViewport((prev: any) => ({
       ...prev,
-      latitude: latitude ? Number(latitude) : Number(defaultLatitude),
-      longitude: longitude ? Number(longitude) : Number(defaultLongitude),
+      lat: lat ? Number(lat) : Number(defaultlat),
+      lon: lon ? Number(lon) : Number(defaultlon),
     }));
-  }, [latitude, longitude, defaultLatitude, defaultLongitude]);
+  }, [lat, lon, defaultlat, defaultlon]);
 
   return (
     <Card className="order-11 col-span-2 h-[25rem] overflow-hidden overscroll-contain  p-0 md:p-0 xl:col-span-3">
