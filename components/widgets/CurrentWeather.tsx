@@ -3,7 +3,6 @@ import { City, HourlyForecastData } from "../../lib/types";
 import Clock from "../ui/Clock";
 import { convertToDate } from "../../lib/dateUtils";
 import IconComponent from "../ui/IconComponent";
-import { Icon } from "@material-ui/core";
 
 interface CurrentWeatherProps {
   city: City;
