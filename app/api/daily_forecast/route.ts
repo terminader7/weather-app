@@ -3,7 +3,6 @@ export async function GET(request: Request) {
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
   const appid = process.env.OPEN_WEATHER_API_KEY;
-  const NUMBER_OF_DAYS = 10;
 
   if (!appid) {
     return Response.json(
@@ -19,7 +18,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const dailyUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${NUMBER_OF_DAYS}&appid=${appid}`;
+  const dailyUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&appid=${appid}`;
 
   const res = await fetch(dailyUrl, {
     next: { revalidate: 900 },

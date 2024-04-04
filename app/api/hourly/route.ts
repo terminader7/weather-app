@@ -3,7 +3,6 @@ export async function GET(request: Request) {
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
   const appid = process.env.OPEN_WEATHER_API_KEY;
-  const NUMBER_OF_HOURS = 23;
 
   if (!appid) {
     return Response.json(
@@ -19,12 +18,11 @@ export async function GET(request: Request) {
     );
   }
 
-  const hourlyUrl = `http://api.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&cnt=${NUMBER_OF_HOURS}&appid=${appid}`;
+  const hourlyUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${appid}`;
 
   const res = await fetch(hourlyUrl, {
     next: { revalidate: 900 },
   });
-
   if (!res.ok) {
     throw new Error("Failed to fetch hourly forecast data");
   }

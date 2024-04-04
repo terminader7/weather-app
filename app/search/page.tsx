@@ -1,6 +1,6 @@
 import { getAirPollutionData } from "../../actions/getAirPollutionData";
 import { getHourlyData } from "../../actions/getHourlyData";
-import { getTenDayForecast } from "../../actions/getTenDayForecast";
+import { getDailyForecast } from "../../actions/getDailyForecast";
 import { getUVData } from "../../actions/getUVData";
 import CurrentWeather from "../../components/widgets/CurrentWeather";
 import HourlyForecast from "../../components/widgets/HourlyForecast";
@@ -48,7 +48,7 @@ export default async function SearchPage({
     lat,
     lon,
   });
-  const TenDayForecastRequest: TenDayForecastData = await getTenDayForecast({
+  const TenDayForecastRequest: TenDayForecastData = await getDailyForecast({
     lat,
     lon,
   });
