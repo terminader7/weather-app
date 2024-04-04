@@ -159,8 +159,8 @@ type Weather = {
 
 type Temperature = {
   day: number;
-  min: number;
-  max: number;
+  temp_min: number;
+  temp_max: number;
   night: number;
   eve: number;
   morn: number;

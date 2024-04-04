@@ -10,9 +10,10 @@ interface TendayForecastProps {
 }
 
 export default function TenDayForecast({ data }: TendayForecastProps) {
+  console.log(data.list);
   const temps = data.list.map((item: ForecastData) => item?.temp);
-  const minTemp = Math.min(...temps.map((temp) => temp.min));
-  const maxTemp = Math.max(...temps.map((temp) => temp.max));
+  const minTemp = Math.min(...temps.map((temp) => temp?.temp_min));
+  const maxTemp = Math.max(...temps.map((temp) => temp?.temp_max));
 
   return (
     <>
@@ -121,15 +122,15 @@ export default function TenDayForecast({ data }: TendayForecastProps) {
                 <div className="flex w-[60%] flex-row gap-2 overflow-hidden">
                   <div className="flex w-full select-none flex-row items-center justify-between gap-2 pr-2 text-sm">
                     <p className="flex w-[3rem] min-w-fit justify-end text-neutral-600 dark:text-neutral-400">
-                      {Math.floor(item.temp.min)}&deg;
+                      {Math.floor(item?.temp?.temp_min)}&deg;
                     </p>
                     <TemperatureRange
                       min={minTemp}
                       max={maxTemp}
-                      value={[item.temp.min, item.temp.max]}
+                      value={[item?.temp?.temp_min, item?.temp?.temp_max]}
                     />
                     <p className="flex w-[3rem] min-w-fit justify-end">
-                      {Math.floor(item.temp.max)}&deg;
+                      {Math.floor(item?.temp?.temp_max)}&deg;
                     </p>
                   </div>
                 </div>
