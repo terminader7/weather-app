@@ -2,7 +2,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
-  const appid = searchParams.get("appid");
+  const appid = process.env.OPEN_WEATHER_API_KEY;
   const NUMBER_OF_DAYS = 10;
 
   if (!appid) {
@@ -19,12 +19,11 @@ export async function GET(request: Request) {
     );
   }
 
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${NUMBER_OF_DAYS}&appid=${appid}`,
-    {
-      next: { revalidate: 900 },
-    }
-  );
+  const dailyUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${NUMBER_OF_DAYS}&appid=${appid}`;
+
+  const res = await fetch(dailyUrl, {
+    next: { revalidate: 900 },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch daily forecast data");

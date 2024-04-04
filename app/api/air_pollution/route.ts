@@ -2,7 +2,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
-  const appid = searchParams.get("appid");
+  const appid = process.env.OPEN_WEATHER_API_KEY;
 
   if (!appid) {
     return Response.json(
@@ -18,12 +18,11 @@ export async function GET(request: Request) {
     );
   }
 
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${appid}`,
-    {
-      next: { revalidate: 900 },
-    }
-  );
+  const airPollutionUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${appid}`;
+
+  const res = await fetch(airPollutionUrl, {
+    next: { revalidate: 900 },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch air pollution data");
