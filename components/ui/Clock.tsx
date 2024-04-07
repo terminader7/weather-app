@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 
 interface ClockProps {
-  initialTime: Date;
+  initial: Date;
   timezone: number;
 }
 
-export default function Clock({ initialTime, timezone }: ClockProps) {
-  const [time, setTime] = useState(calculateLocalTime(initialTime, timezone));
+export default function Clock({ initial, timezone }: ClockProps) {
+  const [time, setTime] = useState(
+    initial ? calculateLocalTime(initial, timezone) : new Date()
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,6 +23,10 @@ export default function Clock({ initialTime, timezone }: ClockProps) {
   function calculateLocalTime(initialTime: Date, offsetSeconds: number): Date {
     const localTime = new Date(initialTime.getTime() + offsetSeconds * 1000);
     return localTime;
+  }
+
+  if (!initial) {
+    return <div>Loading...</div>;
   }
 
   return (

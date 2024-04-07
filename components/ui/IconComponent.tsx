@@ -13,11 +13,16 @@ export default function IconComponent({
   className,
 }: IconComponentProps) {
   const iconNameKey = x ? `${weatherCode}${x}` : weatherCode;
-  const iconName = weatherIconMappings[iconNameKey] || "day-sunny";
+  const iconName = weatherIconMappings[iconNameKey];
 
   return (
     <div className={`relative invert-0 dark:invert ${className}`}>
-      <Image fill alt={weatherCode} src={`/icons/wi-${iconName}.svg`} />
+      <Image
+        fill
+        alt={weatherCode}
+        src={`/icons/wi-${iconName}.svg`}
+        className="select-none"
+      />
     </div>
   );
 }

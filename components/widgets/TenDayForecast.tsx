@@ -3,17 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 import { convertToDate } from "../../lib/dateUtils";
 import { TemperatureRange } from "../ui/TemperatureRange";
 import IconComponent from "../ui/IconComponent";
-import Separator from "../ui/Separator";
+import { Separator } from "../ui/Separator";
 
-interface TendayForecastProps {
+interface TenDayForecastProps {
   data: TenDayForecastData;
 }
 
-export default function TenDayForecast({ data }: TendayForecastProps) {
-  console.log(data.list);
-  const temps = data.list.map((item: ForecastData) => item?.temp);
-  const minTemp = Math.min(...temps.map((temp) => temp?.temp_min));
-  const maxTemp = Math.max(...temps.map((temp) => temp?.temp_max));
+export default function TenDayForecast({ data }: TenDayForecastProps) {
+  const temperatures = data.list.map((item: ForecastData) => item?.temp);
+  const minTemperature = Math.min(
+    ...temperatures.map((temp) => temp?.temp_min)
+  );
+  const maxTemperature = Math.max(
+    ...temperatures.map((temp) => temp?.temp_max)
+  );
 
   return (
     <>
@@ -125,8 +128,8 @@ export default function TenDayForecast({ data }: TendayForecastProps) {
                       {Math.floor(item?.temp?.temp_min)}&deg;
                     </p>
                     <TemperatureRange
-                      min={minTemp}
-                      max={maxTemp}
+                      min={minTemperature}
+                      max={maxTemperature}
                       value={[item?.temp?.temp_min, item?.temp?.temp_max]}
                     />
                     <p className="flex w-[3rem] min-w-fit justify-end">

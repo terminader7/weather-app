@@ -16,7 +16,7 @@ import { useSearchParams } from "next/navigation";
 import { DEFAULT_LOCATION } from "../../lib/config";
 import { useTheme } from "next-themes";
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+const MAPBOX_TOKEN = process.env.PUBLIC_MAPBOX_TOKEN;
 const OPENWEATHERMAP_TOKEN = process.env.OPEN_WEATHER_API_KEY;
 
 export default function Map() {
@@ -31,10 +31,10 @@ export default function Map() {
   }, [theme]);
 
   const searchParams = useSearchParams();
-  const lat = searchParams.get("lat") || DEFAULT_LOCATION.coord.lat;
-  const lon = searchParams.get("lon") || DEFAULT_LOCATION.coord.lon;
+  const lat = searchParams.get("lat");
+  const lon = searchParams.get("lon");
 
-  const [defaultlat, defaultlon] = useMemo(() => {
+  const [defaultLat, defaultLon] = useMemo(() => {
     const latNumber = lat ? Number(lat) : Number(DEFAULT_LOCATION.coord.lat);
     const lonNumber = lon ? Number(lon) : Number(DEFAULT_LOCATION.coord.lon);
     return [latNumber, lonNumber];
@@ -46,7 +46,7 @@ export default function Map() {
       { label: "Precipitation Intensity (mm/s)", code: "PR0" },
       { label: "Wind Speed and Direction (m/s)", code: "WND" },
       { label: "Relative Humidity (%)", code: "HRD0" },
-      { label: "Cloud Cover (%)", code: "CL" },
+      { label: "Cloudiness (%)", code: "CL" },
       { label: "Atmospheric Pressure (hPa)", code: "APM" },
     ];
   }, []);
@@ -59,8 +59,8 @@ export default function Map() {
   };
 
   const [viewport, setViewport] = useState({
-    lat: lat ? Number(lat) : Number(defaultlat),
-    lon: lon ? Number(lon) : Number(defaultlon),
+    latitude: lat ? Number(lat) : Number(defaultLat),
+    longitude: lon ? Number(lon) : Number(defaultLon),
     zoom: 7,
     pitch: 60,
     bearing: -60,
@@ -69,12 +69,12 @@ export default function Map() {
   const [MapCode, setMapCode] = useState("PR0");
 
   useEffect(() => {
-    setViewport((prev: any) => ({
-      ...prev,
-      lat: lat ? Number(lat) : Number(defaultlat),
-      lon: lon ? Number(lon) : Number(defaultlon),
+    setViewport((prevViewport) => ({
+      ...prevViewport,
+      latitude: lat ? Number(lat) : Number(defaultLat),
+      longitude: lon ? Number(lon) : Number(defaultLon),
     }));
-  }, [lat, lon, defaultlat, defaultlon]);
+  }, [lat, lon, defaultLat, defaultLon]);
 
   return (
     <Card className="order-11 col-span-2 h-[25rem] overflow-hidden overscroll-contain  p-0 md:p-0 xl:col-span-3">

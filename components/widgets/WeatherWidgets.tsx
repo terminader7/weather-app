@@ -6,16 +6,16 @@ import {
   CardTitle,
   CardFooter,
 } from "../ui/Card";
-import Progress from "../ui/Progress";
+import { Progress } from "../ui/Progress";
 import AirPollution from "./AirPollution";
 import Compass from "../ui/Compass";
 import { formatSunTime } from "../../lib/dateUtils";
 
-interface WeatherWidgetProps {
+interface WeatherWidgetsProps {
   data: HourlyForecastData;
-  city: City;
   airQuality: AirQualityData;
   uvIndexForToday: number;
+  city: City;
 }
 
 export default function WeatherWidgets({
@@ -23,7 +23,7 @@ export default function WeatherWidgets({
   airQuality,
   uvIndexForToday,
   city,
-}: WeatherWidgetProps) {
+}: WeatherWidgetsProps) {
   return (
     <>
       <AirPollution airQuality={airQuality} className="order-2 md:order-1" />

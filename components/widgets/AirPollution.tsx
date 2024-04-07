@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardFooter,
 } from "../ui/Card";
-import Progress from "../ui/Progress";
+import { Progress } from "../ui/Progress";
 import { AirQualityData } from "../../lib/types";
 import { cn } from "../../lib/utils";
 import { ClassNameValue } from "tailwind-merge";

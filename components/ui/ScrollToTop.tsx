@@ -37,10 +37,10 @@ export default function ScrollToTop() {
         onClick={scrollToTop}
         className={cn(
           isVisible ? "opacity-100" : "opacity-0",
-          "inline-flex items-center rounded-full bg-pink-600 p-3 text-white shadow-sm transition-opacity hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+          "inline-flex items-center rounded-full bg-pink-600 p-3 text-white shadow-sm transition-opacity hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
         )}
       >
-        <ArrowBigUp size={24} aria-hidden="true" />
+        <ArrowBigUp className="h-6 w-6" aria-hidden="true" />
       </button>
     </div>
   );
