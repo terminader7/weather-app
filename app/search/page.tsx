@@ -56,10 +56,7 @@ export default async function SearchPage({
     lat,
     lon,
   });
-  const UvIndexRequest: UVIndexResponse = await getUVData({
-    lat,
-    lon,
-  });
+  const UvIndexRequest: UVIndexResponse = await getUVData({ lat, lon });
 
   const [hourly_data, ten_day_forecast, air_pollution, uv_index] =
     await Promise.all([
