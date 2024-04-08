@@ -32,12 +32,7 @@ export default function RootLayout({
             <div
               className="group flex items-center justify-center gap-1 text-neutral-400 dark:text-neutral-600"
               aria-hidden="true"
-            >
-              <CodeIcon className="w-5 h-5" />
-              <span>with</span>
-              <HeartIcon className="w-5 h-5 group-hover:text-red-500" />
-              <span>In Denmark</span>
-            </div>
+            />
           </footer>
         </NextThemesProvider>
         <Script

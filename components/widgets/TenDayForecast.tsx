@@ -18,8 +18,6 @@ export default function TenDayForecast({ data }: TenDayForecastProps) {
     ...temperatures.map((temp) => temp?.temp_max)
   );
 
-  console.log({ data });
-
   return (
     <>
       <Card className="h-fit shrink-0">
@@ -112,37 +110,40 @@ export default function TenDayForecast({ data }: TenDayForecastProps) {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-base font-normal md:mb-1">
-          {data.list.map((item: ForecastData, i) => (
-            <div key={item.dt}>
-              <div className="flex w-full flex-row items-center justify-between gap-2 last:mb-0">
-                <p className="min-w-[3rem] font-medium">
-                  {i === 0
-                    ? "Today"
-                    : convertToDate(data.city.timezone, item.dt, "short")}
-                </p>
-                <IconComponent
-                  weatherCode={item.weather[0].id}
-                  className=" h-8 w-8"
-                />
-                <div className="flex w-[60%] flex-row gap-2 overflow-hidden">
-                  <div className="flex w-full select-none flex-row items-center justify-between gap-2 pr-2 text-sm">
-                    <p className="flex w-[3rem] min-w-fit justify-end text-neutral-600 dark:text-neutral-400">
-                      {Math.floor(item?.temp?.temp_min)}&deg;
-                    </p>
-                    <TemperatureRange
-                      min={minTemperature}
-                      max={maxTemperature}
-                      value={[item?.temp?.temp_min, item?.temp?.temp_max]}
-                    />
-                    <p className="flex w-[3rem] min-w-fit justify-end">
-                      {Math.floor(item?.temp?.temp_max)}&deg;
-                    </p>
+          {data.list.map((item: ForecastData, i) => {
+            console.log({ item });
+            return (
+              <div key={item.dt}>
+                <div className="flex w-full flex-row items-center justify-between gap-2 last:mb-0">
+                  <p className="min-w-[3rem] font-medium">
+                    {i === 0
+                      ? "Today"
+                      : convertToDate(data.city.timezone, item.dt, "short")}
+                  </p>
+                  <IconComponent
+                    weatherCode={item.weather[0].id}
+                    className=" h-8 w-8"
+                  />
+                  <div className="flex w-[60%] flex-row gap-2 overflow-hidden">
+                    <div className="flex w-full select-none flex-row items-center justify-between gap-2 pr-2 text-sm">
+                      <p className="flex w-[3rem] min-w-fit justify-end text-neutral-600 dark:text-neutral-400">
+                        {Math.floor(item?.main?.temp_min)}&deg;
+                      </p>
+                      <TemperatureRange
+                        min={minTemperature}
+                        max={maxTemperature}
+                        value={[item?.main?.temp_min, item?.main?.temp_max]}
+                      />
+                      <p className="flex w-[3rem] min-w-fit justify-end">
+                        {Math.floor(item?.main?.temp_max)}&deg;
+                      </p>
+                    </div>
                   </div>
                 </div>
+                {i !== data.list.length - 1 && <Separator className="mt-3" />}
               </div>
-              {i !== data.list.length - 1 && <Separator className="mt-3" />}
-            </div>
-          ))}
+            );
+          })}
         </CardContent>
       </Card>
     </>

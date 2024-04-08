@@ -174,6 +174,7 @@ type FeelsLike = {
 };
 
 export type ForecastData = {
+  main: any;
   dt: number;
   sunrise: number;
   sunset: number;
