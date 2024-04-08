@@ -1,18 +1,18 @@
 import { getAirPollutionData } from "../actions/getAirPollutionData";
 import { getHourlyData } from "../actions/getHourlyData";
-import { getDailyForecast } from "../actions/getDailyForecast";
+import { getFiveDayForecast } from "../actions/getFiveDayForecast";
 import { getUVData } from "../actions/getUVData";
 import CurrentWeather from "../components/widgets/CurrentWeather";
 import HourlyForecast from "../components/widgets/HourlyForecast";
 import Map from "../components/widgets/Map";
 import OtherLargeCities from "../components/widgets/OtherLargeCities";
-import TenDayForecast from "../components/widgets/TenDayForecast";
+import FiveDayForecast from "../components/widgets/FiveDayForecast";
 import WeatherWidgets from "../components/widgets/WeatherWidgets";
 import { DEFAULT_LOCATION } from "../lib/config";
 import {
   AirPollutionResponse,
   HourlyForecastResponse,
-  TenDayForecastData,
+  FiveDayForecastData,
   UVIndexResponse,
 } from "../lib/types";
 import { Metadata } from "next";
@@ -30,7 +30,7 @@ export default async function Home() {
     lat,
     lon,
   });
-  const TenDayForecastRequest: TenDayForecastData = await getDailyForecast({
+  const FiveDayForecastRequest: FiveDayForecastData = await getFiveDayForecast({
     lat,
     lon,
   });
@@ -43,7 +43,7 @@ export default async function Home() {
   const [hourly_data, ten_day_forecast, air_pollution, uv_index] =
     await Promise.all([
       HourlyDataRequest,
-      TenDayForecastRequest,
+      FiveDayForecastRequest,
       AirDataRequest,
       UvIndexRequest,
     ]);
@@ -55,7 +55,7 @@ export default async function Home() {
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <CurrentWeather data={hourly_data.list[0]} city={hourly_data.city} />
-          <TenDayForecast data={ten_day_forecast} />
+          <FiveDayForecast data={ten_day_forecast} />
         </div>
         <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
           <WeatherWidgets

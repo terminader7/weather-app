@@ -1,15 +1,15 @@
-import { ForecastData, TenDayForecastData } from "../../lib/types";
+import { ForecastData, FiveDayForecastData } from "../../lib/types";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 import { convertToDate } from "../../lib/dateUtils";
 import { TemperatureRange } from "../ui/TemperatureRange";
 import IconComponent from "../ui/IconComponent";
 import { Separator } from "../ui/Separator";
 
-interface TenDayForecastProps {
-  data: TenDayForecastData;
+interface FiveDayForecastProps {
+  data: FiveDayForecastData;
 }
 
-export default function TenDayForecast({ data }: TenDayForecastProps) {
+export default function FiveDayForecast({ data }: FiveDayForecastProps) {
   const temperatures = data.list.map((item: ForecastData) => item?.temp);
   const minTemperature = Math.min(
     ...temperatures.map((temp) => temp?.temp_min)

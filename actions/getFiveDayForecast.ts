@@ -1,4 +1,4 @@
-export const getDailyForecast = async ({
+export const getFiveDayForecast = async ({
   lat,
   lon,
 }: {
