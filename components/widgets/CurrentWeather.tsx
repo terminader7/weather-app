@@ -12,6 +12,9 @@ interface CurrentWeatherProps {
 export default function CurrentWeather({ data, city }: CurrentWeatherProps) {
   const initial = new Date();
 
+  console.log({ data });
+  console.log({ city });
+
   return (
     <Card className="relative flex h-fit w-full shrink-0 flex-col justify-between overflow-hidden md:h-[25rem]">
       <div className="absolute " />
