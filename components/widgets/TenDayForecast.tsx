@@ -18,6 +18,8 @@ export default function TenDayForecast({ data }: TenDayForecastProps) {
     ...temperatures.map((temp) => temp?.temp_max)
   );
 
+  console.log({ data });
+
   return (
     <>
       <Card className="h-fit shrink-0">
