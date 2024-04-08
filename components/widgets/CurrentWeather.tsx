@@ -12,9 +12,6 @@ interface CurrentWeatherProps {
 export default function CurrentWeather({ data, city }: CurrentWeatherProps) {
   const initial = new Date();
 
-  console.log({ data });
-  console.log({ city });
-
   return (
     <Card className="relative flex h-fit w-full shrink-0 flex-col justify-between overflow-hidden md:h-[25rem]">
       <div className="absolute " />
@@ -48,7 +45,7 @@ export default function CurrentWeather({ data, city }: CurrentWeatherProps) {
         </div>
       </div>
       <div className="flex justify-center py-7 text-8xl font-bold md:py-10">
-        {Math.round(data.main.temp)}&deg;
+        {Math.round(data?.main?.temp)}&deg;
       </div>
       <div>
         <IconComponent

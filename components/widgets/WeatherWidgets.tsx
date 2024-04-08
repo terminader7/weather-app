@@ -24,6 +24,7 @@ export default function WeatherWidgets({
   uvIndexForToday,
   city,
 }: WeatherWidgetsProps) {
+  console.log(data.main.humidity);
   return (
     <>
       <AirPollution airQuality={airQuality} className="order-2 md:order-1" />
@@ -347,7 +348,7 @@ export default function WeatherWidgets({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p>{data.visibility / 1000} km</p>
+          <p>{Math.round((data.visibility / 1000) * 0.621371)} miles</p>
         </CardContent>
         <CardFooter>
           <p>

@@ -42,7 +42,7 @@ export default function Map() {
 
   const weatherTiles = useMemo(() => {
     return [
-      { label: "Temperature (°C)", code: "TA2" },
+      { label: "Temperature (°F)", code: "TA2" },
       { label: "Precipitation Intensity (mm/s)", code: "PR0" },
       { label: "Wind Speed and Direction (m/s)", code: "WND" },
       { label: "Relative Humidity (%)", code: "HRD0" },
