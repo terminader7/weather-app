@@ -111,7 +111,6 @@ export default function TenDayForecast({ data }: TenDayForecastProps) {
         </CardHeader>
         <CardContent className="space-y-2 text-base font-normal md:mb-1">
           {data.list.map((item: ForecastData, i) => {
-            console.log({ item });
             return (
               <div key={item.dt}>
                 <div className="flex w-full flex-row items-center justify-between gap-2 last:mb-0">

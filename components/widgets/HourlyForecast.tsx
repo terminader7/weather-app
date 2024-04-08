@@ -11,10 +11,15 @@ interface HourlyForecastProps {
 }
 
 export default function HourlyForecast({ data }: HourlyForecastProps) {
-  function extractHoursFromDate(dt: number): number {
+  function extractHoursFromDate(dt: number): string {
     const date = new Date(dt * 1000);
-    return date.getHours();
+    let hours = date.getHours();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; //This is for midnight
+    return `${hours}${ampm}`;
   }
+
   const ref =
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref, {
@@ -32,7 +37,13 @@ export default function HourlyForecast({ data }: HourlyForecastProps) {
         {data.slice(0, 12).map((item: HourlyForecastData, i) => (
           <div key={item.dt} className="flex h-full flex-col justify-between">
             <div className="flex justify-center text-sm text-neutral-600 dark:text-neutral-400">
-              {i === 0 ? "Now" : extractHoursFromDate(item.dt)}
+              {i === 0 ? (
+                "Now"
+              ) : (
+                <span className="flex items-center">
+                  <span>{extractHoursFromDate(item.dt)}</span>&nbsp;
+                </span>
+              )}
             </div>
             <div className="flex h-full items-center justify-center">
               <IconComponent
