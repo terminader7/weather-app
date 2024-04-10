@@ -189,9 +189,10 @@ export type ForecastData = {
   clouds: number;
   pop: number;
   rain?: number;
+  dt_txt?: string;
 };
 
-export type TenDayForecastData = {
+export type FiveDayForecastData = {
   city: City;
   cod: string;
   message: number;
