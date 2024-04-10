@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const dailyUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&appid=${appid}`;
+  const dailyUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`;
 
   const res = await fetch(dailyUrl, {
     next: { revalidate: 900 },
