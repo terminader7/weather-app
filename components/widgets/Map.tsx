@@ -115,7 +115,7 @@ export default function Map() {
           id="weatherSource"
           type="raster"
           tiles={[
-            `https://maps.openweathermap.org/maps/2.0/weather/${MapCode}/{z}/{x}/{y}?appid=${OPENWEATHERMAP_TOKEN}`,
+            `https://tile.openweathermap.org/map/${MapCode}/{z}/{x}/{y}.png?appid=${OPENWEATHERMAP_TOKEN}`,
           ]}
           tileSize={256}
         >
