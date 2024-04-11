@@ -64,7 +64,7 @@ export default async function Home() {
             airQuality={air_pollution.list[0]}
             uvIndexForToday={uv_index.daily.uv_index_max[0]}
           />
-          <HourlyForecast data={hourly_data.list} />
+          {/* <HourlyForecast data={hourly_data.list} /> */}
           {/* <Map /> */}
           {/* <OtherLargeCities /> */}
         </section>
