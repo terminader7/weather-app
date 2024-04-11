@@ -17,7 +17,7 @@ import { DEFAULT_LOCATION } from "../../lib/config";
 import { useTheme } from "next-themes";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-const OPENWEATHERMAP_TOKEN = process.env.OPEN_WEATHER_API_KEY;
+const OPENWEATHERMAP_TOKEN = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY;
 
 export default function Map() {
   const { theme } = useTheme();

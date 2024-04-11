@@ -2,7 +2,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
-  const appid = process.env.OPEN_WEATHER_API_KEY;
+  const appid = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY;
 
   if (!appid) {
     return Response.json(
