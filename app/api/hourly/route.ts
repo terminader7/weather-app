@@ -2,7 +2,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
-  const appid = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY;
+  const appid = searchParams.get("appid");
 
   if (!appid) {
     return Response.json(
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const hourlyUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${appid}`;
+  const hourlyUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${appid}&units=imperial`;
 
   const res = await fetch(hourlyUrl, {
     next: { revalidate: 900 },

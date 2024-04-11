@@ -2,7 +2,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
-  const appid = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY;
+  const appid = searchParams.get("appid");
 
   if (!appid) {
     return Response.json(
@@ -17,14 +17,14 @@ export async function GET(request: Request) {
       { status: 400 }
     );
   }
-  const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${appid}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appid}`;
 
   const res = await fetch(url, {
     next: { revalidate: 900 },
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch weather data");
+    throw new Error("Failed to fetch data");
   }
 
   const data = await res.json();
