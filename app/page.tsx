@@ -4,8 +4,8 @@ import { getFiveDayForecast } from "../actions/getFiveDayForecast";
 import { getUVData } from "../actions/getUVData";
 import CurrentWeather from "../components/widgets/CurrentWeather";
 import HourlyForecast from "../components/widgets/HourlyForecast";
-// import Map from "../components/widgets/Map";
-// import OtherLargeCities from "../components/widgets/OtherLargeCities";
+import Map from "../components/widgets/Map";
+import OtherLargeCities from "../components/widgets/OtherLargeCities";
 import FiveDayForecast from "../components/widgets/FiveDayForecast";
 import WeatherWidgets from "../components/widgets/WeatherWidgets";
 import { DEFAULT_LOCATION } from "../lib/config";
@@ -64,9 +64,9 @@ export default async function Home() {
             airQuality={air_pollution.list[0]}
             uvIndexForToday={uv_index.daily.uv_index_max[0]}
           />
-          {/* <HourlyForecast data={hourly_data.list} /> */}
-          {/* <Map /> */}
-          {/* <OtherLargeCities /> */}
+          <HourlyForecast data={hourly_data.list} />
+          <Map />
+          <OtherLargeCities />
         </section>
       </div>
     </>
