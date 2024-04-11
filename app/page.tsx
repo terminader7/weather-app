@@ -65,7 +65,7 @@ export default async function Home() {
             uvIndexForToday={uv_index.daily.uv_index_max[0]}
           />
           <HourlyForecast data={hourly_data.list} />
-          <Map />
+          {/* <Map /> */}
           <OtherLargeCities />
         </section>
       </div>
