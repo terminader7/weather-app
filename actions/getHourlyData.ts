@@ -9,8 +9,11 @@ export const getHourlyData = async ({
   //   `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}&units=imperial`
   // );
 
+  const protocol =
+    process.env.NODE_ENV !== "development" ? "https://" : "http://";
+
   const data = await fetch(
-    `${process.env.VERCEL_URL}/api/hourly?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}&units=imperial`
+    `${protocol}${process.env.VERCEL_URL}/api/hourly?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}&units=imperial`
   );
 
   if (!data.ok) {
