@@ -15,7 +15,7 @@ export function ModeToggle() {
   const { setTheme, theme } = useTheme();
 
   useHotkeys(["t"], () => {
-    setTheme(theme === "ligh" ? "dark" : "light");
+    setTheme(theme === "light" ? "dark" : "light");
   });
 
   return (
@@ -28,13 +28,22 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem
+          onClick={() => setTheme("light")}
+          className={theme === "light" ? "font-bold" : ""}
+        >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem
+          onClick={() => setTheme("dark")}
+          className={theme === "dark" ? "font-bold" : ""}
+        >
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem
+          onClick={() => setTheme("system")}
+          className={theme === "system" ? "font-bold" : ""}
+        >
           System
         </DropdownMenuItem>
       </DropdownMenuContent>
