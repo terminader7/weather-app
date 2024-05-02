@@ -14,7 +14,7 @@ export default function IconComponent({
 }: IconComponentProps) {
   const iconNameKey = x ? `${weatherCode}${x}` : weatherCode;
   const iconName = weatherIconMappings[iconNameKey];
-
+  console.log({ iconNameKey, iconName });
   return (
     <div className={`relative invert-0 dark:invert ${className}`}>
       <Image
