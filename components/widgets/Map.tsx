@@ -42,18 +42,30 @@ export default function Map() {
 
   const weatherTiles = useMemo(() => {
     return [
-      { label: "Temperature (°F)", code: "TA2" },
-      { label: "Precipitation Intensity (mm/s)", code: "PR0" },
-      { label: "Wind Speed and Direction (m/s)", code: "WND" },
-      { label: "Relative Humidity (%)", code: "HRD0" },
-      { label: "Cloudiness (%)", code: "CL" },
-      { label: "Atmospheric Pressure (hPa)", code: "APM" },
+      { label: "Temperature (°F)", code: "TA2", layer: "temp_new" },
+      {
+        label: "Precipitation Intensity (mm/s)",
+        code: "PR0",
+        layer: "precipitation_new",
+      },
+      {
+        label: "Wind Speed and Direction (m/s)",
+        code: "WND",
+        layer: "wind_new",
+      },
+      { label: "Cloudiness (%)", code: "CL", layer: "clouds_new" },
+      {
+        label: "Atmospheric Pressure (hPa)",
+        code: "APM",
+        layer: "pressure_new",
+      },
     ];
   }, []);
 
   const weatherLayer: LayerProps = {
-    id: "weatherLayer",
+    id: "raster-layer",
     type: "raster",
+    source: "raster-source",
     minzoom: 0,
     maxzoom: 15,
   };
@@ -61,12 +73,13 @@ export default function Map() {
   const [viewport, setViewport] = useState({
     latitude: lat ? Number(lat) : Number(defaultLat),
     longitude: lon ? Number(lon) : Number(defaultLon),
-    zoom: 7,
+    zoom: 10,
     pitch: 60,
-    bearing: -60,
+    bearing: 60,
   });
 
-  const [MapCode, setMapCode] = useState("PR0");
+  const [MapCode, setMapCode] = useState("TA2");
+  const layer = weatherTiles.find((tile) => tile.code === MapCode)?.layer;
 
   useEffect(() => {
     setViewport((prevViewport) => ({
@@ -112,12 +125,12 @@ export default function Map() {
       >
         <Source
           key={MapCode}
-          id="weatherSource"
+          id="raster-source"
           type="raster"
           tiles={[
-            `https://tile.openweathermap.org/map/${MapCode}/{z}/{x}/{y}.png?appid=${OPENWEATHERMAP_TOKEN}`,
+            `https://tile.openweathermap.org/map/${layer}/${viewport?.zoom}/${viewport?.bearing}/${viewport?.pitch}.png?appid=${OPENWEATHERMAP_TOKEN}`,
           ]}
-          tileSize={256}
+          tileSize={200}
         >
           <Layer {...weatherLayer} />
         </Source>
