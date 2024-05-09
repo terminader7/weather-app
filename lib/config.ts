@@ -11,18 +11,23 @@ export const DEFAULT_LOCATION: Location = {
 export const DEFAULT_SUGGESTIONS = [
   {
     description: "London, United Kingdom",
+    place_id: "ChIJdd4hrwug2EcRmSrV3Vo6llI",
   },
   {
     description: "Paris, France",
+    place_id: "ChIJD7fiBh9u5kcRYJSMaMOCCwQ",
   },
   {
     description: "Amsterdam, Netherlands",
+    place_id: "ChIJVXealLU_xkcRja_At0z9AGY",
   },
   {
     description: "Dublin, Ireland",
+    place_id: "ChIJL6wn6oAOZ0gRoHExl6nHAAo",
   },
   {
     description: "Lisbon, Portugal",
+    place_id: "ChIJO_PkYRozGQ0R0DaQ5L3rAAQ",
   },
 ];
 
